@@ -4,6 +4,7 @@ import (
 	"context"
 	"flag"
 	"io/ioutil"
+	"runtime"
 	"time"
 
 	"github.com/getlantern/systray"
@@ -98,6 +99,7 @@ func main() {
 	}()
 
 	go func() {
+		runtime.LockOSThread()
 		for range app.control {
 			app.show.Disable()
 			app.Log.Info("Creating webview")
